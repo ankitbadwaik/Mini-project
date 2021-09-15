@@ -4,6 +4,8 @@ import java.util.*;
 
 import Configuration.DbConnection;
 import Bean.Student_Details;
+import Bean.Teachers_Info;
+import Bean.Results;
 
 public class DAOClass implements DAOInterface {
 	
@@ -67,13 +69,52 @@ public class DAOClass implements DAOInterface {
 
 	@Override
 	public void addResult() {
-		// TODO Auto-generated method stub
 		
+		String sql="insert into Results(student_id,marks) values(?,?)";
+		
+		try
+		{
+			PreparedStatement ps=con.prepareStatement(sql);
+			System.out.println("Enter Student Id");
+			ps.setInt(1,sc.nextInt());
+			System.out.println("Enter the Marks");
+			ps.setInt(2, sc.nextInt());
+			int row=ps.executeUpdate();
+			if(row>0)
+				System.out.println(row+" Rows Updated.");
+			else
+				System.out.println("Unable To Update");
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void updateResult() {
+		String sql="update Results set marks=? where student_id=?";
+		try
+		{
+			PreparedStatement ps=con.prepareStatement(sql);
+			System.out.println("Enter the StudentId: ");
+			ps.setInt(2, sc.nextInt());
+			System.out.println("Enter the marks:");
+			ps.setInt(1, sc.nextInt());
+			int row=ps.executeUpdate();
+			System.out.println(row+" Rows Updated.");
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Unable to update.");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void deleteRecord() {
-		String sql="delete s,r from Students_details s inner join result r on s.student_id=r.student_id where s.student_id=?";
+		String sql="delete s,r from Students_details s inner join Results r on s.student_id=r.student_id where s.student_id=?";
 		
 		try
 		{
@@ -153,6 +194,100 @@ public class DAOClass implements DAOInterface {
 			e.printStackTrace();
 		}
 	}
+	
+	public void meritListTopFive() {
+		
+		String sql="select s.student_id,s.student_name,r.marks from Students_details s inner join Results r on s.student_id=r.student_id where batch_id=? && marks>24 order by marks desc limit 5";
+		
+		try
+		{
+			PreparedStatement ps=con.prepareStatement(sql);
+			System.out.println("Enter the Batch Id:");
+			int id=sc.nextInt();
+			ps.setInt(1, id);
+			ResultSet rs=ps.executeQuery();
+			System.out.println("Top 5 Students Merit Students Are: ");
+			while(rs.next())
+			{
+				System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+"\t"+rs.getInt(3));
+			}
+			
+			ps.close();
+			
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Unable to get list");
+			e.printStackTrace();
+		}
+	}
+	
+	public void topTenMeritList() {
+		
+		String sql="select s.student_id,s.student_name,r.marks,bd.batch_name from Students_details s inner join Results r on s.student_id=r.student_id inner join Batches bd on bd.batch_id=s.batch_id where marks>24 order by marks desc limit 10";
+		try
+		{
+			PreparedStatement ps=con.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			System.out.println("***Top 10 Students From Academy***");
+			while(rs.next())
+			{
+				System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+"\t"+rs.getInt(3)+"\t"+rs.getString(4));	
+			}
+			
+			ps.close();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Unable to Fetch list.");
+		}
+		
+	}
+	
+	public void maxFailStudents() {
+		
+		String sql="select bd.batch_name,count(*) from Students_details s inner join Results r on s.student_id=r.student_id inner join Batches bd on bd.batch_id=s.batch_id where marks<25";
+		try
+		{
+			PreparedStatement ps=con.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			System.out.println("Batch Name  \t| No. Of Failed Students");
+			while(rs.next())
+			{
+				System.out.println(rs.getString(1)+"\t\t|"+rs.getInt(2));
+			}
+			
+			ps.close();
+					
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Unable to Fetch record.");
+		}
+	}
+	
+	public void avgBestBatch() {
+		String sql="select teacher_name,batch_name,count(*) from Students_details s inner join Results r on s.student_id=r.student_id inner join Teacher_details t on t.batch_id=s.batch_id inner join Batches bd on bd.batch_id=s.batch_id  where r.marks>24 group by teacher_name limit 1"; 
+		try
+		{
+			PreparedStatement ps=con.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next())
+			{
+				System.out.println("Batch name : "+rs.getString(2));
+				System.out.println("Teacher name : "+rs.getString(1));
+				System.out.println("No of passed students : "+rs.getInt(3));
+			
+			}
+			
+			ps.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+	}
+
 
 
 

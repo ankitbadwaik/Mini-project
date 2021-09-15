@@ -16,8 +16,12 @@ public class MainClass {
 			System.out.println("1.Add Data.");
 			System.out.println("2.Update Data.");
 			System.out.println("3.Delete data.");
-			System.out.println("4.Add Marks");
-			System.out.println("5.Exit.");
+			System.out.println("4.Add/Update Marks.");
+			System.out.println("5.Merit list of students for any given batch( top 5 students)");
+			System.out.println("6.Merit list of students for all batches ( top 10 students)");
+			System.out.println("7.Name of the batch where maximum students have failed");
+			System.out.println("8.Batch name and trainer name of the batch whose average percentage result is best");
+			System.out.println("9.Exit.");
 			System.out.println("Enter Your Choice...");
 			int choice=sc.nextInt();
 			
@@ -66,13 +70,60 @@ public class MainClass {
 				break;
 			case 3:
 				obj.deleteRecord();
+				System.out.println();
+				System.out.println("Record Deleted!!..");
 				break;
 			case 4:
 				
+				System.out.println("1.To Add Result");
+				System.out.println("2.To Update Any Result");
+				
+				int ch2=sc.nextInt();
+				switch(ch2) {
+				case 1:
+					obj.addResult();
+					System.out.println();
+					System.out.println("Result Added Successfully...");
+					break;
+				case 2:
+					obj.updateResult();
+					System.out.println();
+					System.out.println("Result Updated Successfully...");
+					break;
+				}
+				break;
+			case 5:
+				System.out.println();
+				obj.meritListTopFive();
+				System.out.println();
+				break;
+			case 6:
+				System.out.println();
+				obj.topTenMeritList();
+				System.out.println();
+				break;
+			case 7:
+				System.out.println();
+				obj.maxFailStudents();
+				System.out.println();
+				break;
+			case 8:
+				System.out.println();
+				obj.avgBestBatch();
+				System.out.println();
+				break;
+			case 9:
+				DbConnection.closeConnection();
+				
+				System.out.println(".......End.....");
+				
+				sc.close();
+				System.exit(0);
 				break;
 
 			default:
-				break;
+				System.out.println("Invalid Choice!!... Try Again.");
+				
 			}
 		}
 
