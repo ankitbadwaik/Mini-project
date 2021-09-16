@@ -9,7 +9,7 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		
-		DAOClass obj=new DAOClass();
+		DAOClass ta=new DAOClass();
 		Scanner sc=new Scanner(System.in);
 		
 		while(true) {
@@ -27,7 +27,7 @@ public class MainClass {
 			
 			switch (choice) {
 			case 1:
-				obj.addStudent();
+				ta.addStudent();
 				
 				break;
 			case 2:
@@ -41,7 +41,7 @@ public class MainClass {
 				case 1:
 					System.out.println("Updating status of Student");
 					System.out.println();
-					obj.modifyStatus();
+					ta.modifyStatus();
 					System.out.println();
 					
 					break;
@@ -49,14 +49,14 @@ public class MainClass {
 				case 2:
 					System.out.println("Updating Student Phone Number");
 					System.out.println();
-					obj.updatePhoneNumber();
+					ta.updatePhoneNumber();
 					System.out.println();
 					
 					break;
 				case 3:
 					System.out.println("Updating Batch Details");
 					System.out.println();
-					obj.changeBatch();
+					ta.changeBatch();
 					System.out.println();
 					break;
 					
@@ -69,7 +69,7 @@ public class MainClass {
 				
 				break;
 			case 3:
-				obj.deleteRecord();
+				ta.deleteRecord();
 				System.out.println();
 				System.out.println("Record Deleted!!..");
 				break;
@@ -81,12 +81,12 @@ public class MainClass {
 				int ch2=sc.nextInt();
 				switch(ch2) {
 				case 1:
-					obj.addResult();
+					ta.addResult();
 					System.out.println();
 					System.out.println("Result Added Successfully...");
 					break;
 				case 2:
-					obj.updateResult();
+					ta.updateResult();
 					System.out.println();
 					System.out.println("Result Updated Successfully...");
 					break;
@@ -94,22 +94,22 @@ public class MainClass {
 				break;
 			case 5:
 				System.out.println();
-				obj.meritListTopFive();
+				ta.meritListTopFive();
 				System.out.println();
 				break;
 			case 6:
 				System.out.println();
-				obj.topTenMeritList();
+				ta.topTenMeritList();
 				System.out.println();
 				break;
 			case 7:
 				System.out.println();
-				obj.maxFailStudents();
+				ta.maxFailStudents();
 				System.out.println();
 				break;
 			case 8:
 				System.out.println();
-				obj.avgBestBatch();
+				ta.avgBestBatch();
 				System.out.println();
 				break;
 			case 9:

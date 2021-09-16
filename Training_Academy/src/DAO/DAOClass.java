@@ -206,7 +206,7 @@ public class DAOClass implements DAOInterface {
 			int id=sc.nextInt();
 			ps.setInt(1, id);
 			ResultSet rs=ps.executeQuery();
-			System.out.println("Top 5 Students Merit Students Are: ");
+			System.out.println("Top 5 Merit Students Are: ");
 			while(rs.next())
 			{
 				System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+"\t"+rs.getInt(3));
@@ -229,7 +229,7 @@ public class DAOClass implements DAOInterface {
 		{
 			PreparedStatement ps=con.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
-			System.out.println("***Top 10 Students From Academy***");
+			System.out.println("Top 10 Students in Academy");
 			while(rs.next())
 			{
 				System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+"\t"+rs.getInt(3)+"\t"+rs.getString(4));	
@@ -251,10 +251,10 @@ public class DAOClass implements DAOInterface {
 		{
 			PreparedStatement ps=con.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
-			System.out.println("Batch Name  \t| No. Of Failed Students");
+			System.out.println("Batch   \t No. Of Failed Students");
 			while(rs.next())
 			{
-				System.out.println(rs.getString(1)+"\t\t|"+rs.getInt(2));
+				System.out.println(rs.getString(1)+"\t \t"+rs.getInt(2));
 			}
 			
 			ps.close();
@@ -276,7 +276,7 @@ public class DAOClass implements DAOInterface {
 			{
 				System.out.println("Batch name : "+rs.getString(2));
 				System.out.println("Teacher name : "+rs.getString(1));
-				System.out.println("No of passed students : "+rs.getInt(3));
+				System.out.println("No. of passed students : "+rs.getInt(3));
 			
 			}
 			
