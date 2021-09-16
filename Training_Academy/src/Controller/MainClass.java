@@ -1,6 +1,6 @@
 package Controller;
+
 import java.util.*;
-import java.sql.*;
 
 import Configuration.DbConnection;
 import DAO.DAOClass;
@@ -8,11 +8,11 @@ import DAO.DAOClass;
 public class MainClass {
 
 	public static void main(String[] args) {
-		
-		DAOClass ta=new DAOClass();
-		Scanner sc=new Scanner(System.in);
-		
-		while(true) {
+
+		DAOClass ta = new DAOClass();
+		Scanner sc = new Scanner(System.in);
+
+		while (true) {
 			System.out.println("1.Add Data.");
 			System.out.println("2.Update Data.");
 			System.out.println("3.Delete data.");
@@ -21,37 +21,39 @@ public class MainClass {
 			System.out.println("6.Merit list of students for all batches ( top 10 students)");
 			System.out.println("7.Name of the batch where maximum students have failed");
 			System.out.println("8.Batch name and trainer name of the batch whose average percentage result is best");
-			System.out.println("9.Exit.");
+			System.out.println("9.Students Information");
+			System.out.println("10.Teacher Information");
+			System.out.println("11.Batch Info");
+			System.out.println("12.Exit.");
 			System.out.println("Enter Your Choice...");
-			int choice=sc.nextInt();
-			
+			int choice = sc.nextInt();
+
 			switch (choice) {
 			case 1:
 				ta.addStudent();
-				
+
 				break;
 			case 2:
 				System.out.println("1.Update Status of student.");
 				System.out.println("2.Update Student Phone number.");
 				System.out.println("3.Update Student Batch.");
-				
-				int ch1=sc.nextInt();
-				switch(ch1)
-				{
+
+				int ch1 = sc.nextInt();
+				switch (ch1) {
 				case 1:
 					System.out.println("Updating status of Student");
 					System.out.println();
 					ta.modifyStatus();
 					System.out.println();
-					
+
 					break;
-					
+
 				case 2:
 					System.out.println("Updating Student Phone Number");
 					System.out.println();
 					ta.updatePhoneNumber();
 					System.out.println();
-					
+
 					break;
 				case 3:
 					System.out.println("Updating Batch Details");
@@ -59,14 +61,14 @@ public class MainClass {
 					ta.changeBatch();
 					System.out.println();
 					break;
-					
+
 				case 4:
 					System.out.println("Updating Student Id");
 					System.out.println();
-					
+
 					break;
 				}
-				
+
 				break;
 			case 3:
 				ta.deleteRecord();
@@ -74,12 +76,12 @@ public class MainClass {
 				System.out.println("Record Deleted!!..");
 				break;
 			case 4:
-				
+
 				System.out.println("1.To Add Result");
 				System.out.println("2.To Update Any Result");
-				
-				int ch2=sc.nextInt();
-				switch(ch2) {
+
+				int ch2 = sc.nextInt();
+				switch (ch2) {
 				case 1:
 					ta.addResult();
 					System.out.println();
@@ -113,17 +115,32 @@ public class MainClass {
 				System.out.println();
 				break;
 			case 9:
+				System.out.println();
+				ta.studentInfo();
+				System.out.println();
+				break;
+			case 10:
+				System.out.println();
+				ta.teacherInfo();
+				System.out.println();
+				break;
+			case 11:
+				System.out.println();
+				ta.batchInfo();
+				System.out.println();
+				break;
+			case 12:
 				DbConnection.closeConnection();
-				
+
 				System.out.println(".......End.....");
-				
+
 				sc.close();
 				System.exit(0);
 				break;
 
 			default:
 				System.out.println("Invalid Choice!!... Try Again.");
-				
+
 			}
 		}
 

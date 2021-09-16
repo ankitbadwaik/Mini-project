@@ -1,14 +1,14 @@
 package Bean;
 
 public class Teachers_Info {
-	
+
 	private int teacherId;
 	private String teacherName;
 	private int batchId;
 	private String contactNo;
-	
+
 	public Teachers_Info() {
-		
+
 	}
 
 	public int getTeacherId() {
@@ -42,7 +42,5 @@ public class Teachers_Info {
 	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
-	
-	
 
 }
