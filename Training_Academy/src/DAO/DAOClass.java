@@ -6,6 +6,7 @@ import java.util.*;
 
 import Configuration.DbConnection;
 import Bean.Student_Details;
+import Bean.Results;
 
 public class DAOClass implements DAOInterface {
 
@@ -67,13 +68,15 @@ public class DAOClass implements DAOInterface {
 	public void addResult() {
 
 		String sql = "insert into Results(student_id,marks) values(?,?)";
+		Results result = new Results();
+		result.setResults();
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			System.out.println("Enter Student Id");
-			ps.setInt(1, sc.nextInt());
-			System.out.println("Enter the Marks");
-			ps.setInt(2, sc.nextInt());
+
+			ps.setInt(1, result.getStudentId());
+
+			ps.setInt(2, result.getMarks());
 			int row = ps.executeUpdate();
 			if (row > 0)
 				System.out.println(row + " Rows Updated.");
@@ -89,12 +92,14 @@ public class DAOClass implements DAOInterface {
 
 	public void updateResult() {
 		String sql = "update Results set marks=? where student_id=?";
+		Results re = new Results();
+		re.setResults();
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			System.out.println("Enter the StudentId: ");
-			ps.setInt(2, sc.nextInt());
-			System.out.println("Enter the marks:");
-			ps.setInt(1, sc.nextInt());
+
+			ps.setInt(2, re.getStudentId());
+
+			ps.setInt(1, re.getMarks());
 			int row = ps.executeUpdate();
 			System.out.println(row + " Rows Updated.");
 		} catch (Exception e) {
@@ -228,7 +233,7 @@ public class DAOClass implements DAOInterface {
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			System.out.println("Batch   \t No. Of Failed Students");
+			System.out.println("Batch Name  \t No. Of Failed Students");
 			while (rs.next()) {
 				System.out.println(rs.getString(1) + "\t \t" + rs.getInt(2));
 			}

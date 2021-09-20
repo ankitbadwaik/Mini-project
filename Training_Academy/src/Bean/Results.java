@@ -32,6 +32,7 @@ public class Results {
 
 		System.out.println("Enter Student id:");
 		this.setStudentId(sc.nextInt());
+		this.validateMarks();
 
 	}
 
